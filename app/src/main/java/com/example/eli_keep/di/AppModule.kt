@@ -15,10 +15,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-    @Provides
-    fun provideNoteDao(database: NoteDatabase): NoteDao {
-        return database.noteDao()
-    }
 
     @Provides
     @Singleton
@@ -28,6 +24,11 @@ object AppModule {
             NoteDatabase::class.java,
             "note_database"
         ).build()
+    }
+
+    @Provides
+    fun provideNoteDao(database: NoteDatabase): NoteDao {
+        return database.noteDao()
     }
 
     @Provides

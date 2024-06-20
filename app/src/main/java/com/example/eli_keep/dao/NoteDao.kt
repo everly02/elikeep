@@ -10,10 +10,10 @@ interface NoteDao {
     fun getAllNotes(): Flow<List<Note>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(note: Note)
+    suspend fun insert(note: Note):Long
 
     @Delete
-    suspend fun delete(note: Note):Int
+    suspend fun delete(note: Note)
 
     @Update
     suspend fun update(note: Note)

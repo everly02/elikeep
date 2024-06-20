@@ -4,25 +4,21 @@ import androidx.annotation.WorkerThread
 import com.example.eli_keep.dao.NoteDao
 import com.example.eli_keep.database.Note
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 // NoteRepository.kt
-class NoteRepository(private val noteDao: NoteDao) {
+class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
     val allNotes: Flow<List<Note>> = noteDao.getAllNotes()
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun insert(note: Note) {
         noteDao.insert(note)
     }
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
-    suspend fun delete(note: Note): Int {
-        return noteDao.delete(note)
-    }
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun update(note: Note) {
         noteDao.update(note)
+    }
+
+    suspend fun delete(note: Note) {
+        noteDao.delete(note)
     }
 }

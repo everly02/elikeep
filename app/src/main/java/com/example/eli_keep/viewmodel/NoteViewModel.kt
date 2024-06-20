@@ -1,3 +1,4 @@
+// NoteViewModel.kt
 package com.example.eli_keep.viewmodel
 
 import androidx.lifecycle.LiveData
@@ -6,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.eli_keep.database.Note
 import com.example.eli_keep.repository.NoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import androidx.lifecycle.asLiveData
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import androidx.lifecycle.asLiveData
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(private val repository: NoteRepository) : ViewModel() {
@@ -18,11 +19,11 @@ class NoteViewModel @Inject constructor(private val repository: NoteRepository) 
         repository.insert(note)
     }
 
-    fun delete(note: Note) = viewModelScope.launch {
-        val rowsDeleted = repository.delete(note)
-
-    }
     fun update(note: Note) = viewModelScope.launch {
         repository.update(note)
+    }
+
+    fun delete(note: Note) = viewModelScope.launch {
+        repository.delete(note)
     }
 }
